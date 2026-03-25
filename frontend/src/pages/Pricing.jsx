@@ -11,7 +11,6 @@ const Pricing = () => {
     const fetchOrg = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/organizations/me');
-        // For MVP, just take the first one
         setCurrentOrg(response.data[0]?.organizationId);
       } catch (error) {
         console.error('Fetch org error:', error);
@@ -54,35 +53,50 @@ const Pricing = () => {
   ];
 
   return (
-    <div>
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '40px', marginBottom: '16px' }}>Ready to Scale?</h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '18px' }}>Unlock the full power of AI for your business ventures.</p>
+    <div style={{ animation: 'fadeIn 0.4s ease-out' }}>
+      <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <h1 style={{ fontSize: '32px', marginBottom: '12px', fontWeight: 800 }}>Ready to Scale?</h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: '16px' }}>Unlock the full power of AI for your business ventures.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px', maxWidth: '900px', margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', maxWidth: '800px', margin: '0 auto' }}>
         {plans.map((plan, i) => (
           <div key={i} className="glass-card" style={{ 
-            border: plan.highlight ? '2px solid var(--accent-primary)' : '1px solid var(--border-glass)',
-            padding: '40px',
+            border: plan.highlight ? '2px solid var(--accent-blue)' : '1px solid var(--border-light)',
+            padding: '36px',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            boxShadow: plan.highlight ? 'var(--shadow-md)' : 'var(--shadow-sm)',
+            position: 'relative',
+            overflow: 'hidden',
+            animation: `slideUp 0.5s ease-out ${i * 0.1}s both`
           }}>
             {plan.highlight && (
-              <span style={{ background: 'var(--accent-primary)', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800, alignSelf: 'flex-start', marginBottom: '16px' }}>
-                MOST POPULAR
+              <span style={{ 
+                background: 'var(--gradient-main)', 
+                padding: '5px 16px', 
+                borderRadius: 'var(--radius-full)', 
+                fontSize: '11px', 
+                fontWeight: 700, 
+                alignSelf: 'flex-start', 
+                marginBottom: '16px',
+                color: '#fff',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase'
+              }}>
+                Most Popular
               </span>
             )}
-            <h3 style={{ fontSize: '24px', marginBottom: '8px' }}>{plan.name}</h3>
-            <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: '32px' }}>
-              <span style={{ fontSize: '48px', fontWeight: 800 }}>{plan.price}</span>
-              <span style={{ color: 'var(--text-secondary)', marginLeft: '4px' }}>{plan.interval}</span>
+            <h3 style={{ fontSize: '22px', marginBottom: '8px', fontWeight: 700 }}>{plan.name}</h3>
+            <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: '28px' }}>
+              <span style={{ fontSize: '44px', fontWeight: 800, color: 'var(--text-dark)' }}>{plan.price}</span>
+              <span style={{ color: 'var(--text-light)', marginLeft: '4px', fontSize: '15px' }}>{plan.interval}</span>
             </div>
 
-            <ul style={{ listStyle: 'none', padding: 0, marginBottom: '40px', flexGrow: 1 }}>
-              {plan.features.map((f, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', color: 'var(--text-secondary)' }}>
-                  <FiCheck style={{ color: 'var(--accent-primary)' }} /> {f}
+            <ul style={{ listStyle: 'none', padding: 0, marginBottom: '32px', flexGrow: 1 }}>
+              {plan.features.map((f, j) => (
+                <li key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px', color: 'var(--text-muted)', fontSize: '14px' }}>
+                  <FiCheck style={{ color: 'var(--accent-teal)', flexShrink: 0 }} /> {f}
                 </li>
               ))}
             </ul>
@@ -93,11 +107,15 @@ const Pricing = () => {
               disabled={plan.disabled || loading}
               style={{ 
                 width: '100%', 
-                background: plan.disabled ? 'rgba(255,255,255,0.05)' : 'var(--gradient-main)',
+                background: plan.disabled ? 'var(--bg-soft)' : 'var(--gradient-main)',
+                color: plan.disabled ? 'var(--text-light)' : '#fff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px'
+                gap: '8px',
+                padding: '13px 24px',
+                fontSize: '15px',
+                border: plan.disabled ? '1px solid var(--border-light)' : 'none'
               }}
             >
               {plan.highlight && <FiZap />} {loading ? 'Redirecting...' : plan.buttonText}

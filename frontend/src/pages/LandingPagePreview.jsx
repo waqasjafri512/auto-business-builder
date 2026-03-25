@@ -26,17 +26,24 @@ const LandingPagePreview = () => {
     fetchProject();
   }, [id]);
 
-  if (loading) return <div style={{ background: '#05050a', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>Loading landing page...</div>;
-  if (!project) return <div>Project not found</div>;
+  if (loading) return (
+    <div style={{ background: '#FFFFFF', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+      <div style={{ textAlign: 'center' }}>
+        <div className="loader" style={{ margin: '0 auto 16px' }}></div>
+        <p>Loading landing page...</p>
+      </div>
+    </div>
+  );
+  if (!project) return <div style={{ padding: '80px', textAlign: 'center', color: 'var(--text-muted)' }}>Project not found</div>;
 
   const landingConfig = project?.aiResponse?.landingPage;
 
   if (!landingConfig || !landingConfig.sections) {
     return (
-      <div style={{ background: '#05050a', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#fff', gap: '20px' }}>
-        <h2>Landing Page Not Available</h2>
-        <p style={{ color: 'rgba(255,255,255,0.5)' }}>The AI did not generate landing page data for this project.</p>
-        <Link to={`/projects/${id}`} style={{ color: 'var(--accent-primary)', textDecoration: 'underline' }}>
+      <div style={{ background: '#FFFFFF', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dark)', gap: '16px' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 700 }}>Landing Page Not Available</h2>
+        <p style={{ color: 'var(--text-muted)' }}>The AI did not generate landing page data for this project.</p>
+        <Link to={`/projects/${id}`} style={{ color: 'var(--accent-blue)', textDecoration: 'none', fontWeight: 600, marginTop: '8px' }}>
           ← Back to Project
         </Link>
       </div>
@@ -45,25 +52,29 @@ const LandingPagePreview = () => {
 
   return (
     <div style={{ position: 'relative' }}>
-        <Link to={`/projects/${id}`} style={{ 
-            position: 'fixed', 
-            top: '20px', 
-            left: '20px', 
-            zIndex: 100, 
-            background: 'rgba(0,0,0,0.5)', 
-            backdropFilter: 'blur(10px)', 
-            padding: '8px 16px', 
-            color: 'white', 
-            textDecoration: 'none', 
-            borderRadius: '20px', 
-            border: '1px solid rgba(255,255,255,0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-        }}>
-            <FiArrowLeft /> Back to Project
-        </Link>
-        <LandingPageRenderer config={landingConfig} />
+      <Link to={`/projects/${id}`} style={{ 
+        position: 'fixed', 
+        top: '16px', 
+        left: '16px', 
+        zIndex: 100, 
+        background: 'rgba(255,255,255,0.9)', 
+        backdropFilter: 'blur(8px)', 
+        padding: '8px 18px', 
+        color: 'var(--text-dark)', 
+        textDecoration: 'none', 
+        borderRadius: 'var(--radius-full)', 
+        border: '1px solid var(--border-light)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        fontSize: '14px',
+        fontWeight: 600,
+        boxShadow: 'var(--shadow-sm)',
+        transition: 'box-shadow 0.2s ease'
+      }}>
+        <FiArrowLeft /> Back to Project
+      </Link>
+      <LandingPageRenderer config={landingConfig} />
     </div>
   );
 };

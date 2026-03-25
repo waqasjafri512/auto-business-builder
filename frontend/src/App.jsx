@@ -25,10 +25,13 @@ function App() {
       <AuthProvider>
         <Toaster position="bottom-right" toastOptions={{
           style: {
-            background: '#1a1a2e',
-            color: '#fff',
-            border: '1px solid rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(10px)'
+            background: '#FFFFFF',
+            color: '#1E293B',
+            border: '1px solid #E2E8F0',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+            borderRadius: '12px',
+            fontSize: '14px',
+            fontWeight: 500
           }
         }} />
         <Routes>
@@ -37,11 +40,13 @@ function App() {
           
           <Route path="/" element={
             <PrivateRoute>
-              <div className="glass-card">
-                <h2>Welcome back to AutoBiz Dashboard</h2>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '8px' }}>
-                  Your business engine is ready. Create a new project or view your saved ones.
-                </p>
+              <div style={{ animation: 'fadeIn 0.4s ease-out' }}>
+                <div className="glass-card" style={{ boxShadow: 'var(--shadow-md)', padding: '32px' }}>
+                  <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px' }}>Welcome back to AutoBiz Dashboard 👋</h2>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '15px', lineHeight: '1.6' }}>
+                    Your business engine is ready. Create a new project or view your saved ones.
+                  </p>
+                </div>
               </div>
             </PrivateRoute>
           } />

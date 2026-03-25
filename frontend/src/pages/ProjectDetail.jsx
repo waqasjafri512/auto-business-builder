@@ -41,20 +41,20 @@ const ProjectDetail = () => {
   if (loading) return (
     <div style={{ padding: '80px 40px', textAlign: 'center' }}>
       <div className="loader" style={{ margin: '0 auto 20px' }}></div>
-      <p style={{ color: 'var(--text-secondary)' }}>Analyzing your business strategy...</p>
+      <p style={{ color: 'var(--text-muted)' }}>Analyzing your business strategy...</p>
     </div>
   );
   
-  if (!project) return <div style={{ padding: '80px 40px', textAlign: 'center' }}>Project not found</div>;
+  if (!project) return <div style={{ padding: '80px 40px', textAlign: 'center', color: 'var(--text-muted)' }}>Project not found</div>;
 
   const { aiResponse, status } = project;
 
   if (status === 'GENERATING') {
     return (
       <div style={{ padding: '80px 40px', textAlign: 'center' }}>
-        <div className="loader" style={{ margin: '0 auto 40px' }}></div>
-        <h2 style={{ marginBottom: '16px' }}>AI is Crafting Your Success...</h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto' }}>
+        <div className="loader" style={{ margin: '0 auto 32px', width: '48px', height: '48px' }}></div>
+        <h2 style={{ marginBottom: '12px', fontSize: '24px' }}>AI is Crafting Your Success...</h2>
+        <p style={{ color: 'var(--text-muted)', maxWidth: '500px', margin: '0 auto', lineHeight: '1.7' }}>
           We are generating your market analysis, business plan, and landing page. This usually takes 15-30 seconds.
         </p>
       </div>
@@ -63,63 +63,70 @@ const ProjectDetail = () => {
 
   return (
     <div style={{ animation: 'fadeIn 0.5s ease-out' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
+      {/* Header */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h1 style={{ fontSize: '36px', fontWeight: 800, marginBottom: '12px', background: 'linear-gradient(90deg, #fff 0%, var(--accent-primary) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <h1 style={{ fontSize: '30px', fontWeight: 800, marginBottom: '8px', color: 'var(--text-dark)' }}>
             {aiResponse?.businessName || 'Your Business Strategy'}
           </h1>
-          <p style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '18px', letterSpacing: '0.5px' }}>
-             {aiResponse?.tagline}
+          <p style={{ color: 'var(--accent-teal)', fontWeight: 600, fontSize: '16px' }}>
+            {aiResponse?.tagline}
           </p>
         </div>
-        <Link to={`/landing-page/${id}`} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none', padding: '12px 24px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0, 122, 255, 0.3)' }}>
-          <FiLayout fontSize={18} /> View Landing Page <FiArrowRight />
+        <Link to={`/landing-page/${id}`} className="btn-primary" style={{ 
+          display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', 
+          padding: '12px 24px', borderRadius: 'var(--radius-md)', fontSize: '14px',
+          flexShrink: 0
+        }}>
+          <FiLayout fontSize={16} /> View Landing Page <FiArrowRight />
         </Link>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
+      {/* Cards Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '20px' }}>
+        
         {/* Executive Summary */}
-        <div className="glass-card" style={{ padding: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ padding: '10px', background: 'rgba(0, 122, 255, 0.1)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
-              <FiTarget fontSize={24} />
+        <div className="glass-card" style={{ padding: '28px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}>
+            <div className="icon-badge blue">
+              <FiTarget fontSize={20} />
             </div>
-            <h3 style={{ margin: 0, fontSize: '20px' }}>Executive Summary</h3>
+            <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>Executive Summary</h3>
           </div>
-          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '15px' }}>
+          <p style={{ color: 'var(--text-muted)', lineHeight: '1.8', fontSize: '14px' }}>
             {aiResponse?.businessPlan?.executiveSummary || aiResponse?.description || 'Your vision is currently being refined...'}
           </p>
         </div>
 
         {/* Market Analysis */}
-        <div className="glass-card" style={{ padding: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ padding: '10px', background: 'rgba(0, 122, 255, 0.1)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
-              <FiTrendingUp fontSize={24} />
+        <div className="glass-card" style={{ padding: '28px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '18px' }}>
+            <div className="icon-badge teal">
+              <FiTrendingUp fontSize={20} />
             </div>
-            <h3 style={{ margin: 0, fontSize: '20px' }}>Market Analysis</h3>
+            <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>Market Analysis</h3>
           </div>
-          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '15px' }}>
+          <p style={{ color: 'var(--text-muted)', lineHeight: '1.8', fontSize: '14px' }}>
             {aiResponse?.businessPlan?.marketAnalysis || 'Market research completed. Strategic positioning identified.'}
           </p>
         </div>
 
         {/* Marketing Strategy */}
-        <div className="glass-card" style={{ gridColumn: 'span 2', padding: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-             <div style={{ padding: '10px', background: 'rgba(0, 122, 255, 0.1)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
-              <FiCheckCircle fontSize={24} />
+        <div className="glass-card" style={{ gridColumn: 'span 2', padding: '28px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+            <div className="icon-badge blue">
+              <FiCheckCircle fontSize={20} />
             </div>
-            <h3 style={{ margin: 0, fontSize: '20px' }}>Marketing Strategy</h3>
+            <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>Marketing Strategy</h3>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '32px' }}>
             <div>
-              <p style={{ fontWeight: 700, marginBottom: '16px', color: '#fff', fontSize: '16px' }}>Growth Channels</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <p style={{ fontWeight: 700, marginBottom: '14px', color: 'var(--text-dark)', fontSize: '15px' }}>Growth Channels</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {aiResponse?.marketingPlan?.channels?.map((c, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-secondary)' }}>
-                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)' }}></div>
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-muted)', fontSize: '14px' }}>
+                    <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent-teal)', flexShrink: 0 }}></div>
                     {c}
                   </div>
                 ))}
@@ -127,10 +134,10 @@ const ProjectDetail = () => {
             </div>
             
             <div>
-              <p style={{ fontWeight: 700, marginBottom: '16px', color: '#fff', fontSize: '16px' }}>SEO Keywords</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+              <p style={{ fontWeight: 700, marginBottom: '14px', color: 'var(--text-dark)', fontSize: '15px' }}>SEO Keywords</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {aiResponse?.marketingPlan?.seoKeywords?.map((k, i) => (
-                  <span key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '8px', fontSize: '13px', color: 'var(--text-secondary)' }}>
+                  <span key={i} className="tag">
                     #{k}
                   </span>
                 ))}
@@ -140,26 +147,26 @@ const ProjectDetail = () => {
         </div>
 
         {/* Financials */}
-         <div className="glass-card" style={{ padding: '32px', gridColumn: 'span 2' }}>
+        <div className="glass-card" style={{ padding: '28px', gridColumn: 'span 2' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ padding: '10px', background: 'rgba(0, 122, 255, 0.1)', borderRadius: '10px', color: 'var(--accent-primary)' }}>
-              <FiDollarSign fontSize={24} />
+            <div className="icon-badge teal">
+              <FiDollarSign fontSize={20} />
             </div>
-            <h3 style={{ margin: 0, fontSize: '20px' }}>Financial Estimates</h3>
+            <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>Financial Estimates</h3>
           </div>
-          <div style={{ display: 'flex', gap: '60px' }}>
-             <div>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '4px' }}>Initial Startup Cost</p>
-                <p style={{ fontSize: '24px', fontWeight: 700, color: '#fff' }}>{aiResponse?.businessPlan?.costEstimation?.startup || 'TBD'}</p>
-             </div>
-             <div>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '4px' }}>Monthly Running Cost</p>
-                <p style={{ fontSize: '24px', fontWeight: 700, color: '#fff' }}>{aiResponse?.businessPlan?.costEstimation?.monthly || 'TBD'}</p>
-             </div>
-             <div>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '4px' }}>Revenue Strategy</p>
-                <p style={{ color: '#fff', fontWeight: 600 }}>{aiResponse?.businessPlan?.revenueModel || 'Scalable SaaS Model'}</p>
-             </div>
+          <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
+            <div>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '4px', fontSize: '13px', fontWeight: 500 }}>Initial Startup Cost</p>
+              <p style={{ fontSize: '24px', fontWeight: 700, color: 'var(--text-dark)' }}>{aiResponse?.businessPlan?.costEstimation?.startup || 'TBD'}</p>
+            </div>
+            <div>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '4px', fontSize: '13px', fontWeight: 500 }}>Monthly Running Cost</p>
+              <p style={{ fontSize: '24px', fontWeight: 700, color: 'var(--text-dark)' }}>{aiResponse?.businessPlan?.costEstimation?.monthly || 'TBD'}</p>
+            </div>
+            <div>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '4px', fontSize: '13px', fontWeight: 500 }}>Revenue Strategy</p>
+              <p style={{ color: 'var(--text-dark)', fontWeight: 600, fontSize: '15px' }}>{aiResponse?.businessPlan?.revenueModel || 'Scalable SaaS Model'}</p>
+            </div>
           </div>
         </div>
       </div>

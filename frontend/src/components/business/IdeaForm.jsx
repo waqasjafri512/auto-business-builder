@@ -36,18 +36,18 @@ const IdeaForm = () => {
   };
 
   return (
-    <div className="glass-card" style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <h2 style={{ marginBottom: '24px' }}>Launch New Business</h2>
+    <div className="glass-card" style={{ maxWidth: '600px', margin: '0 auto', padding: '32px', boxShadow: 'var(--shadow-md)' }}>
+      <h2 style={{ marginBottom: '24px', fontSize: '20px', fontWeight: 700 }}>Launch New Business</h2>
       
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '20px' }}>
-          <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>
+          <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-muted)', fontSize: '13px', fontWeight: 600 }}>
             What is your business idea?
           </label>
           <textarea 
             className="input-field" 
             rows="4"
-            style={{ resize: 'none' }}
+            style={{ resize: 'none', marginBottom: 0 }}
             value={idea}
             onChange={(e) => setIdea(e.target.value)}
             placeholder="e.g. I want to start a shoe store in Lahore"
@@ -57,7 +57,7 @@ const IdeaForm = () => {
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>
+            <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-muted)', fontSize: '13px', fontWeight: 600 }}>
               Location (Optional)
             </label>
             <input 
@@ -66,10 +66,11 @@ const IdeaForm = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="e.g. Lahore, Pakistan"
+              style={{ marginBottom: 0 }}
             />
           </div>
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-secondary)' }}>
+            <label style={{ display: 'block', marginBottom: '6px', color: 'var(--text-muted)', fontSize: '13px', fontWeight: 600 }}>
               Budget (Optional)
             </label>
             <input 
@@ -78,6 +79,7 @@ const IdeaForm = () => {
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
               placeholder="e.g. $5,000"
+              style={{ marginBottom: 0 }}
             />
           </div>
         </div>
@@ -86,9 +88,9 @@ const IdeaForm = () => {
           type="submit" 
           className="btn-primary" 
           disabled={loading}
-          style={{ width: '100%', marginTop: '12px' }}
+          style={{ width: '100%', marginTop: '24px', padding: '13px 24px', fontSize: '15px' }}
         >
-          {loading ? 'Analyzing Idea...' : 'Generate Startup Kit'}
+          {loading ? 'Analyzing Idea...' : '✨ Generate Startup Kit'}
         </button>
       </form>
     </div>
