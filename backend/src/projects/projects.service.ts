@@ -77,4 +77,10 @@ export class ProjectsService {
     if (!project) throw new NotFoundException('Project not found');
     return project;
   }
+
+  async remove(id: string): Promise<any> {
+    const project = await this.projectModel.findByIdAndDelete(id).exec();
+    if (!project) throw new NotFoundException('Project not found');
+    return { message: 'Project deleted successfully' };
+  }
 }

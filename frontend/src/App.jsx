@@ -10,6 +10,7 @@ import ProjectsList from './pages/ProjectsList';
 import LandingPagePreview from './pages/LandingPagePreview';
 import Pricing from './pages/Pricing';
 import Success from './pages/Success';
+import Dashboard from './pages/Dashboard';
 import Layout from './components/layout/Layout';
 
 // Protected Route Component
@@ -40,14 +41,7 @@ function App() {
           
           <Route path="/" element={
             <PrivateRoute>
-              <div style={{ animation: 'fadeIn 0.4s ease-out' }}>
-                <div className="glass-card" style={{ boxShadow: 'var(--shadow-md)', padding: '32px' }}>
-                  <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '8px' }}>Welcome back to AutoBiz Dashboard 👋</h2>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '15px', lineHeight: '1.6' }}>
-                    Your business engine is ready. Create a new project or view your saved ones.
-                  </p>
-                </div>
-              </div>
+              <Dashboard />
             </PrivateRoute>
           } />
 

@@ -113,12 +113,97 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
 }
 
+.btn-secondary {
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-soft);
+  border-color: var(--border-medium);
+}
+
 .btn-primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
+
+.btn-icon-danger {
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid transparent;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon-danger:hover {
+  background: #FEF2F2;
+  color: var(--danger);
+  border-color: #FEE2E2;
+}
+
+/* ── Dashboard Table ── */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-table th {
+  text-align: left;
+  padding: 16px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-soft);
+}
+
+.dashboard-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.2s ease;
+}
+
+.dashboard-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dashboard-table tbody tr:hover td {
+  background: var(--bg-soft);
+}
+
+.status-badge-small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge-small.success { background: #ECFDF5; color: #059669; }
+.status-badge-small.warning { background: #FFFBEB; color: #D97706; }
+.status-badge-small.danger { background: #FEF2F2; color: #DC2626; }
 
 /* ── Sidebar ── */
 .sidebar {
