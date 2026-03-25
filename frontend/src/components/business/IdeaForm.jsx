@@ -10,7 +10,6 @@ const IdeaForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // business plan generation
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
